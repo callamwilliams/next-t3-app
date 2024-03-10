@@ -1,10 +1,12 @@
 import { Button, buttonVariants } from '@/components/ui/button';
 import { ROUTES } from '@/config/routes';
-import { cn } from '@/lib/utils';
+import { cn } from '~/lib/utils';
 
-export function UserSessionButton() {
-  const isAuthenticated = false;
+interface UserSessionButtonProps {
+  isAuthenticated: boolean;
+}
 
+export function UserSessionButton({ isAuthenticated }: UserSessionButtonProps) {
   if (isAuthenticated) {
     return (
       <div className="flex">

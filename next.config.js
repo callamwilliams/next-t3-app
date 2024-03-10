@@ -2,15 +2,9 @@
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
  */
-await import("./src/env.js");
-import withBundleAnalyzer from '@next/bundle-analyzer';
+await import('./src/env.js');
 
 /** @type {import("next").NextConfig} */
-
-
-const bundleAnalyzer = withBundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
-});
 
 const securityHeaders = [
   {
@@ -21,14 +15,14 @@ const securityHeaders = [
     key: 'X-XSS-Protection',
     value: '1; mode=block',
   },
-  { 
+  {
     key: 'Referrer-Policy',
     value: 'origin-when-cross-origin',
   },
 ];
 
 /** @type {import('next').NextConfig} */
-export default bundleAnalyzer({
+const nextConfig = {
   async headers() {
     return [
       {
@@ -58,5 +52,6 @@ export default bundleAnalyzer({
   transpilePackages: ['lucide-react'],
   typescript: { ignoreBuildErrors: true },
   experimental: {},
-});
+};
 
+export default nextConfig;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { ModeToggle } from '@/components/mode-toggle';
-import { cn } from '@/lib/utils';
+import { cn } from '~/lib/utils';
 
 export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
   return (

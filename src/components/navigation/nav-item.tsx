@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
 
-import { cn } from '@/lib/utils';
 import type { MainNavItem } from '@/types';
+import { cn } from '~/lib/utils';
 
 interface NavItemProps {
   item: MainNavItem;

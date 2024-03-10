@@ -25,7 +25,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/components/ui/use-toast';
-import { cn } from '@/lib/utils';
+import { cn } from '~/lib/utils';
 
 const profileFormSchema = z.object({
   username: z

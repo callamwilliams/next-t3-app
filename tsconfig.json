@@ -30,7 +30,7 @@
       "@/*": ["./src/*"],
       "@/public/*": ["./public/*"],
       "@/components": ["./src/components"],
-      "@/utils": ["./src/utils"]
+      "@/utils": ["./src/lib/utils"]
     }
   },
   "include": [

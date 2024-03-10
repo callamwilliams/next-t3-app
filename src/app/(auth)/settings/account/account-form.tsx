@@ -31,7 +31,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { toast } from '@/components/ui/use-toast';
-import { cn } from '@/lib/utils';
+import { cn } from '~/lib/utils';
 
 const languages = [
   { label: 'English', value: 'en' },

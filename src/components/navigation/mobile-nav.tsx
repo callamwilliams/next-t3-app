@@ -1,54 +1,46 @@
-'use client';
-
-import * as React from 'react';
-
-import { X, Star } from 'lucide-react';
-import Link from 'next/link';
-
-import { siteConfig } from '@/config/site';
-import { useLockBody } from '@/hooks/use-lock-body';
-import { cn } from '@/lib/utils';
-
+import { Button, buttonVariants } from '@/components/ui/button';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import { cn } from '~/lib/utils';
+import { type MainNavItem } from '~/types';
 import { NavItem } from './nav-item';
-import type { MainNavItem } from '../../types';
 
-interface MobileNavProps {
+interface MainNavProps {
   items?: MainNavItem[];
   children?: React.ReactNode;
   isAuthenticated: boolean;
 }
 
-export function MobileNav({
-  items,
-  children,
-  isAuthenticated,
-}: MobileNavProps) {
-  const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
-  useLockBody();
-
+export function MobileNav({ items, isAuthenticated }: MainNavProps) {
   return (
-    <>
-      <button
-        className="flex items-center space-x-2 md:hidden"
-        onClick={() => {
-          setShowMobileMenu(!showMobileMenu);
-        }}
-        type="button"
-      >
-        {showMobileMenu ? <X /> : <Star />}
-        <span className="font-bold">Menu</span>
-      </button>
-      {showMobileMenu && items ? (
-        <div
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button
           className={cn(
-            'fixed inset-0 top-16 z-50 grid h-[calc(100vh-4rem)] grid-flow-row auto-rows-max overflow-auto p-6 pb-32 shadow-md animate-in slide-in-from-bottom-80 md:hidden',
+            buttonVariants({ variant: 'outline', size: 'sm' }),
+            'px-4 md:hidden',
           )}
+          variant="outline"
         >
-          <div className="relative z-20 grid gap-6 rounded-md bg-popover p-4 text-popover-foreground shadow-md">
-            <Link className="flex items-center space-x-2" href="/">
-              <span className="font-bold">{siteConfig.name}</span>
-            </Link>
-            <nav className="grid grid-flow-row auto-rows-max text-sm">
+          Open
+        </Button>
+      </SheetTrigger>
+      <SheetContent>
+        <SheetHeader>
+          <SheetTitle>Starter</SheetTitle>
+          <SheetDescription>Starter project</SheetDescription>
+        </SheetHeader>
+        <div className="grid gap-4 py-4">
+          {items?.length ? (
+            <nav className="gap-6 md:flex">
               {items.map((item) => (
                 <NavItem
                   isAuthenticated={isAuthenticated}
@@ -57,10 +49,12 @@ export function MobileNav({
                 />
               ))}
             </nav>
-            {children}
-          </div>
+          ) : null}
         </div>
-      ) : null}
-    </>
+        <SheetFooter>
+          <SheetClose asChild></SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   );
 }

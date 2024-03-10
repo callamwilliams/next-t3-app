@@ -7,7 +7,7 @@ import { Inter as FontSans } from 'next/font/google';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
-import { cn } from '@/lib/utils';
+import { cn } from '~/lib/utils';
 import { TRPCReactProvider } from '~/trpc/react';
 
 export const metadata: Metadata = {

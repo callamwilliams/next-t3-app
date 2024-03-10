@@ -1,14 +1,17 @@
 import { MainNav } from '@/components/navigation/main-nav';
 import { SiteFooter } from '@/components/site-footer';
-import { UserSessionButton } from '@/components/UserSessionButton';
 import { siteConfig } from '@/config/site';
+import { createClient } from '~/lib/utils/supabase/server';
 
-export default function BaseTemplate({
+export default async function BaseTemplate({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const isAuthenticated = true;
+  const supabase = createClient();
+  const { data } = await supabase.auth.getUser();
+
+  const isAuthenticated = data?.user;
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -18,8 +21,6 @@ export default function BaseTemplate({
             isAuthenticated={Boolean(isAuthenticated)}
             items={siteConfig.mainNav}
           />
-
-          <UserSessionButton />
         </div>
       </header>
       <main className="container flex-1">{children}</main>
